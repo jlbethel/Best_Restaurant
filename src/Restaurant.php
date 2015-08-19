@@ -60,25 +60,33 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->exec("INSERT INTO restaurants (name, phone_number, address, id, cuisine_id) VALUES ('{$this->getName()}', '{$this->getNumber()}', '{$this->getAddress()}', {$this->getCuisineId()})");
+            $GLOBALS['DB']->exec("INSERT INTO restaurants (name, phone_number, address, cuisine_id) VALUES ('{$this->getName()}', '{$this->getNumber()}', '{$this->getAddress()}', {$this->getCuisineId()})");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants");
-            $restaurants=array();
+            $restaurants = array();
             foreach($returned_restaurants as $restaurant) {
                 $name = $restaurant['name'];
                 $phone_number = $restaurant['phone_number'];
                 $address = $restaurant['address'];
                 $id = $restaurant['id'];
-                $category_id = $restaurant['restaurant'];
+                $cuisine_id = $restaurant['cuisine_id'];
                 $new_restaurant = new Restaurant($name, $phone_number, $address, $id, $cuisine_id);
                 array_push($restaurants, $new_restaurant);
             }
             return $restaurants;
+
+
         }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM restaurants;");
+        }
+
     }
 
 
