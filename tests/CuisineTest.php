@@ -116,40 +116,32 @@
             $this->assertEquals($test_Cuisine, $result);
         }
 
+        function test_getRestaurants()
+        {
+            //Arrange
+           $flavor = "Pizza";
+           $id = null;
+           $test_cuisine = new Cuisine($flavor, $id);
+           $test_cuisine->save();
 
+           $test_cuisine_id = $test_cuisine->getId();
 
+           $name = "Burger Bash";
+           $phone_number = "555-666-7777";
+           $address = "8020 Ground Chuck";
+           $test_restaurant = new Restaurant($name, $phone_number, $address, $id, $test_cuisine_id);
+           $test_restaurant->save();
 
+           $name2 = "Pizza Party";
+           $phone_number2 = "555-666-7747";
+           $address2 = "1234 Pepperoni Lane";
+           $test_restaurant2 = new Restaurant($name2, $phone_number2, $address2, $id, $test_cuisine_id);
+           $test_restaurant2->save();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+           //Act
+           $result = $test_cuisine->getRestaurants();
+           //Assert
+           $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
+        }
     }
  ?>
