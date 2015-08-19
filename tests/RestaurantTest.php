@@ -40,6 +40,30 @@
 
             //Assert
             $this->assertEquals(true, is_numeric($result));
+        }
+
+        function test_getCuisineId()
+        {
+            //Arrange
+            $flavor = "Burgers";
+            $id = null;
+            $test_cuisine = new Cuisine($flavor, $id);
+            $test_cuisine->save();
+
+            $name = "Burger Bash";
+            $phone_number = "555-666-7777";
+            $address = "8020 Ground Chuck";
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $phone_number, $address, $id, $cuisine_id);
+            $test_restaurant->save();
+
+            //Act
+            $result = $test_restaurant->getCuisineId();
+
+            //Assert
+            $this->assertEquals(true, is_numeric($result));
+
+
 
         }
 
