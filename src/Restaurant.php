@@ -17,6 +17,68 @@
             $this->id = $id;
             $this->cuisine_id = $cuisine_id;
         }
+
+        function setName($new_name)
+        {
+            $this->name = (string) $new_name;
+
+        }
+
+        function getName()
+        {
+            return $this->name;
+        }
+
+        function getNumber()
+        {
+            return $this->phone_number;
+        }
+
+        function setNumber($new_number)
+        {
+            $this->phone_number = (string) $new_number;
+        }
+
+        function setAddress($address)
+        {
+            $this->address = (string) $new_address;
+        }
+
+        function getAddress(){
+            return $this->address;
+        }
+
+        function getId()
+        {
+            return $this->id;
+        }
+
+        function getCuisineId()
+        {
+            return $this->cuisine_id;
+        }
+
+        function save()
+        {
+            $statement = $GLOBALS['DB']->exec("INSERT INTO restaurants (name, phone_number, address, id, cuisine_id) VALUES ('{$this->getName()}', '{$this->getNumber()}', '{$this->getAddress()}', {$this->getCuisineId()})");
+            $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        static function getAll()
+        {
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants");
+            $restaurants=array();
+            foreach($returned_restaurants as $restaurant) {
+                $name = $restaurant['name'];
+                $phone_number = $restaurant['phone_number'];
+                $address = $restaurant['address'];
+                $id = $restaurant['id'];
+                $category_id = $restaurant['restaurant'];
+                $new_restaurant = new Restaurant($name, $phone_number, $address, $id, $cuisine_id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
     }
 
 
