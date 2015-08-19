@@ -36,6 +36,54 @@
             $this->assertEquals($flavor, $result);
         }
 
+        function test_getId()
+        {
+            //Arrange
+            $flavor = "Pizza";
+            $id = 1;
+            $test_Cuisine = new Cuisine($flavor, $id);
+
+            //Act
+            $result = $test_Cuisine->getId();
+
+            //Assert
+            $this->assertEquals(true, is_numeric)($result));
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
  ?>
