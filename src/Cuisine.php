@@ -24,6 +24,44 @@
         {
             return $this->id;
         }
+
+        function save()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO cuisines (flavor) VALUES ('{$this->getFlavor()}');");
+            $this->id= $GLOBALS['DB']->lastInsertId();
+
+        }
+
+        static function getAll()
+        {
+            $returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisines;");
+            $cuisines = array();
+            foreach($returned_cuisines as $cuisine) {
+                $flavor = $cuisine['flavor'];
+                $id = $cuisine['id'];
+                $new_cuisine  = new Cuisine($flavor, $id);
+                array_push($cuisines, $new_cuisine);
+            }
+            return $cuisines;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM cuisines;");
+        }
+
+        static function find($search_id)
+        {
+            $found_cuisine = null;
+            $cuisines = Cuisine::getAll();
+            foreach($cuisines as $cuisine) {
+                $cuisine_id = $cuisine->getId();
+                if ($cuisine_id == $search_id) {
+                    $found_cuisine = $cuisine;
+                }
+             return $found_cuisine;
+            }
+        }
     }
 
  ?>
