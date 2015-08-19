@@ -47,8 +47,8 @@
             $result = $test_Cuisine->getId();
 
             //Assert
-            $this->assertEquals(true, is_numeric)($result));
-                }
+            $this->assertEquals(true, is_numeric($result));
+        }
 
 
 

@@ -19,6 +19,11 @@
         {
             return $this->flavor;
         }
+
+        function getId()
+        {
+            return $this->id;
+        }
     }
 
  ?>
