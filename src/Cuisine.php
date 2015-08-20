@@ -59,8 +59,8 @@
                 if ($cuisine_id == $search_id) {
                     $found_cuisine = $cuisine;
                 }
-             return $found_cuisine;
             }
+            return $found_cuisine;
         }
 
         function getRestaurants()
@@ -73,8 +73,8 @@
                 $address = $restaurant['address'];
                 $id = $restaurant['id'];
                 $cuisine_id = $restaurant['cuisine_id'];
-                $new_Restaurant = new Restaurant($name, $phone_number, $address, $id, $cuisine_id);
-                array_push($restaurants, $new_Restaurant);
+                $new_restaurant = new Restaurant($name, $phone_number, $address, $id, $cuisine_id);
+                array_push($restaurants, $new_restaurant);
             }
             return $restaurants;
         }

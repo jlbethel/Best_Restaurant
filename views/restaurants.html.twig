@@ -4,14 +4,14 @@
         <title>Choose Your Food:</title>
     </head>
     <body>
-        <<div class="container">
+        <div class="container">
             <h1> {{ cuisine.getFlavor}}</h1>
 
             {% if restaurants is not empty %}
             <p>Here Are The Restaurants:</p>
             <ul>
-                    {% for retaurant in restaurants %}
-                        <li>{{ restaurant.getName }}</li>
+                    {% for restaurant in restaurants %}
+                        <li><a href="/place/{{ restaurant.getId }}">{{ restaurant.getName }}</a></li>
                     {% endfor %}
             </ul>
         {% endif %}
@@ -19,8 +19,8 @@
         <h4> Add a Restaurant:</h4>
 
         <form action="/restaurants" method='post'>
-            <input id="cuisine_id" name="cuisine_id" type="hidden" value"{{ cuisine.getId }}">
-            <label for='name'>Restaurant></label>
+            <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId }}">
+            <label for='name'>Restaurant</label>
             <input id="name" name="name" type="text">
             <button type="submit">Add Restaurant</button>
         </form>
