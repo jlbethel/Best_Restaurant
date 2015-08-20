@@ -78,6 +78,18 @@
             }
             return $restaurants;
         }
+
+        function update($new_flavor)
+        {
+            $GLOBALS['DB']->exec("UPDATE cuisines SET flavor = '{$new_flavor}' WHERE id = {$this->getId()};");
+            $this->setFlavor($new_flavor);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM cuisines WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE cuisine_id = {$this->getId()};");
+        }
     }
 
 

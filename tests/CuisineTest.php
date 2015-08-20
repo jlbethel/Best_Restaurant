@@ -20,7 +20,7 @@
         protected function tearDown()
         {
             Cuisine::deleteAll();
-            // Restaurant::deleteAll();
+            Restaurant::deleteAll();
         }
 
         function test_getFlavor()
@@ -143,5 +143,66 @@
            //Assert
            $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
         }
+
+        function testUpdate()
+        {
+            //Arrange
+            $flavor = "Pizza";
+            $id = null;
+            $test_cuisine = new Cuisine($flavor, $id);
+            $test_cuisine->save();
+
+            $new_flavor = "Burgers";
+
+            //Act
+            $test_cuisine->update($new_flavor);
+
+            //Assert
+            $this->assertEquals("Burgers", $test_cuisine->getFlavor());
+        }
+
+        function testDelete()
+        {
+            //Arrange
+            $flavor = "Pizza";
+            $id = null;
+            $test_cuisine = new Cuisine($flavor, $id);
+            $test_cuisine->save();
+
+            $flavor2 = "Burgers";
+            $test_cuisine2 = new Cuisine($flavor2, $id);
+            $test_cuisine2->save();
+
+
+            //Act
+            $test_cuisine->delete();
+
+            //Assert
+            $this->assertEquals([$test_cuisine2], Cuisine::getAll());
+        }
+
+        function testDeleteCuisineRestaurants()
+        {
+        //Arrange
+        $flavor = "Pizza";
+        $id = null;
+        $test_cuisine = new Cuisine($flavor, $id);
+        $test_cuisine->save();
+
+        $name = "Pizza Party";
+        $phone_number = "123-123-1234";
+        $address = "1234 Pepporoni Lane";
+        $cuisine_id = $test_cuisine->getId();
+        $test_restaurant = new Restaurant($name, $phone_number, $address, $id, $cuisine_id);
+        $test_restaurant->save();
+
+
+        //Act
+        $test_cuisine->delete();
+
+        //Assert
+        $this->assertEquals([], Restaurant::getAll());
+        }
+
     }
  ?>

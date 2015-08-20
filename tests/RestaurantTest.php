@@ -174,6 +174,57 @@
             $this->assertEquals($test_restaurant, $result);
         }
 
+        function testUpdate()
+        {
+            //Arrange
+
+            $flavor = "Pizza";
+            $id= null;
+            $test_cuisine = new Cuisine($flavor, $id);
+
+            $name = "Pizza Party";
+            $phone_number = "123-456-7890";
+            $address = "1234 Pepperoni Lane";
+
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $phone_number, $address, $id, $cuisine_id);
+            $test_restaurant->save();
+
+            $new_name = "Burger Bash";
+
+            //Act
+            $test_restaurant->update($new_name);
+
+            //Assert
+            $this->assertEquals("Pizza", $test_cuisine->getFlavor());
+        }
+
+        function testDelete()
+        {
+            //Arrange
+            $name = "Pizza Party";
+            $phone_number = "123-456-7890";
+            $address = "1234 Pepperoni Lane";
+            $id = null;
+            $cuisine_id = 4;
+            $test_restaurant = new Restaurant($name, $phone_number, $address, $id, $cuisine_id);
+            $restaurant_id = $test_restaurant->getId();
+            $test_restaurant->save();
+
+            $name2 = "Burger Bash ";
+
+            $test_restaurant2 = new Restaurant($name2, $phone_number, $address, $id, $cuisine_id);
+            $test_restaurant2->save();
+
+
+            //Act
+            $test_restaurant->delete();
+
+            //Assert
+            $this->assertEquals([$test_restaurant2], Restaurant::getAll());
+        }
+
+
     }
 
 
