@@ -8,7 +8,7 @@
 	  <h1>Update {{ restaurant.getName }} Info</h1>
 
 	     <form action="/restaurant_properties" method ="post">
-			    <input id="restaurant_id" name="restaurant_id" type="hidden" value="{{ category.getId }}">
+			    <input id="restaurant_id" name="restaurant_id" type="hidden" value="{{ restaurant.getId }}">
 			    <label for="name">Restaurant name</label>
 			    <input id="name" name="name" type="text">
 
