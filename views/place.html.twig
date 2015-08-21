@@ -5,7 +5,23 @@
 </head>
 <body>
 	<div class="container">
-	<h1></h1>
+	  <h1>Update {{ restaurant.getName }} Info</h1>
 
+	     <form action="/restaurant_properties" method ="post">
+			    <input id="restaurant_id" name="restaurant_id" type="hidden" value="{{ category.getId }}">
+			    <label for="name">Restaurant name</label>
+			    <input id="name" name="name" type="text">
+
+			    <label for="phone_number">Phone Number</label>
+			    <input id="phone_number" name="phone_number" type="text">
+
+			    <label for="address">Address</label>
+			    <input id="address" name="address" type="text">
+
+			    <button type="submit">Add Restaurant Info</button>
+		</form>
+
+		<p><a href="/">Home</a></p>
+</div>
 </body>
 </html>
